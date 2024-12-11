@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body style="background-color:antiquewhite">
+    <h1 style="background-color: greenyellow; color: green;">All chats will appear here</h1>
+    <div>
+        <% for(chats of allchats) { %>
+            <div style="border: 2px solid black ; margin-bottom: 10px; ">
+                <p  style=" color: rgb(41, 171, 222);margin-left: 3px; font-weight:bolder;">Sender: <%= chats.sender %></p>
+                <p style=" color: rgb(233, 42, 176);margin-left: 3px; font-weight: bolder;">Msg: <%= chats.msg %></p>
+                <p style=" color: rgb(5, 179, 8);margin-left: 3px; font-weight: bolder;">Receiver: <%= chats.reciver %></p>
+                <button style="background-color: greenyellow; color: green; font-weight: 600; margin-bottom: 3px; margin-left: 3px;" onclick="deleteChat('<%= chats._id %>')">Delete chat</button>
+            </div>
+        <% } %>
+    </div>
+    <footer style="background-color: greenyellow; color: green; text-align: center; padding: 10px 0; position: fixed; bottom: 0; width: 100%;">
+      <p>&copy; 2024 Virat Creations. All rights reserved.</p>
+  </footer>
+    <script>
+      async function deleteChat(chatId) {
+          const response = await fetch(`/chats/${chatId}`, { method: 'DELETE' });
+          if (response.ok) {
+              alert("Chat deleted successfully");
+              location.reload(); // Reload the page to show updated chat list
+          } else {
+              alert("Failed to delete chat");
+          }
+      }
+  </script>
+</body>
+</html>
